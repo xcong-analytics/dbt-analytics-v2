@@ -1,55 +1,167 @@
-# Physician Engagement Analytics
+# Healthcare Analytics ELT Pipeline
 
-A comprehensive analytics pipeline built with dbt Core and Snowflake to analyze physician engagement patterns across pharmaceutical clients.
+An end-to-end healthcare analytics solution built with **Snowflake, dbt Core, SQL, Tableau, Python, and Git** to transform physician engagement data into analytics-ready models for executive reporting and business decision-making.
 
-## Project Overview
-
-This project models physician engagement data to help pharma companies identify key opinion leaders (KOLs) and optimize client relationships. The pipeline processes 500+ physicians, 20 pharmaceutical clients, and 5,000+ engagement records.
-
-## Data Architecture
-
-### Raw Tables (Snowflake)
-- `PHYSICIANS` - Physician details (specialty, location, experience, publications)
-- `PHARMA_CLIENTS` - Client company information and budgets
-- `EVENTS` - Academic events and conferences
-- `ENGAGEMENTS` - Physician participation records
-
-### dbt Models (Transformations)
-
-**Staging Models:**
-- `stg_physicians` - Cleaned physician dimension
-- `stg_pharma_clients` - Cleaned client dimension
-- `stg_events` - Cleaned event dimension
-- `stg_engagements` - Cleaned engagement facts
-
-**Analytics Models:**
-- `physician_engagement_score` - Engagement score = (conference_attendance × 0.4) + (speaking_events × 0.4) + (publications × 0.2)
-- `physician_tier` - Physician classification (Tier A: >=20, Tier B: >=10, Tier C: <10)
-- `client_performance` - Client metrics (physician count, avg engagement, event count)
-
-## Dashboard
-
-Interactive Tableau dashboard: [View Dashboard](https://public.tableau.com/authoring/PhysicianEngagementDashboard/PhysicianEngagementDashboard#1)
-
-**Visualizations:**
-- Physician distribution by tier
-- Average engagement score by pharmaceutical client
+---
 
 ## Tech Stack
 
-- **Data Warehouse:** Snowflake
-- **Transformation:** dbt Core 1.9.0
-- **Visualization:** Tableau Public
-- **Version Control:** Git
-- **Data Generation:** Python (Faker, Pandas)
+**Data Warehouse:** Snowflake
 
-## How to Run
+**Transformation:** dbt Core 1.9
+
+**Programming:** SQL, Python (Pandas, Faker)
+
+**Visualization:** Tableau Public
+
+**Version Control:** Git
+
+---
+
+# Business Problem
+
+Healthcare organizations collect physician engagement data across conferences, educational programs, and pharmaceutical collaborations.
+
+Without a standardized analytics pipeline, reporting becomes fragmented, data quality becomes difficult to maintain, and business reporting is hard to scale.
+
+This project demonstrates how modern ELT architecture using Snowflake and dbt transforms raw operational data into trusted analytics models supporting physician engagement analysis, executive reporting, and strategic decision-making.
+
+---
+
+# Architecture
+
+```
+                Raw Data (Snowflake)
+
+      PHYSICIANS
+      PHARMA_CLIENTS
+      EVENTS
+      ENGAGEMENTS
+                │
+                ▼
+         dbt Staging Layer
+      • stg_physicians
+      • stg_events
+      • stg_engagements
+      • stg_pharma_clients
+                │
+                ▼
+        Analytics Layer
+      • physician_engagement_score
+      • physician_tier
+      • client_performance
+                │
+                ▼
+        Tableau Dashboard
+                │
+                ▼
+ Executive Reporting & Business Insights
+```
+
+---
+
+# Data Model
+
+### Raw Tables
+
+| Table | Description |
+|------|-------------|
+| PHYSICIANS | Physician demographics, specialty, publications, experience |
+| PHARMA_CLIENTS | Pharmaceutical client information and budgets |
+| EVENTS | Academic conferences and educational programs |
+| ENGAGEMENTS | Physician participation and engagement records |
+
+---
+
+### dbt Staging Models
+
+- `stg_physicians`
+- `stg_pharma_clients`
+- `stg_events`
+- `stg_engagements`
+
+---
+
+### Analytics Models
+
+### physician_engagement_score
+
+Calculates physician engagement using weighted business metrics:
+
+```
+Conference Attendance × 40%
++ Speaking Events × 40%
++ Publications × 20%
+```
+
+---
+
+### physician_tier
+
+Classifies physicians into business-friendly engagement tiers.
+
+| Tier | Score |
+|------|------|
+| Tier A | ≥20 |
+| Tier B | ≥10 |
+| Tier C | <10 |
+
+---
+
+### client_performance
+
+Aggregates client-level KPIs including:
+
+- Physician Count
+- Average Engagement Score
+- Event Count
+
+---
+
+# Dashboard
+
+Interactive Tableau dashboard:
+
+🔗 **View Dashboard**
+
+Dashboard includes:
+
+- Physician distribution by engagement tier
+- Average engagement score by pharmaceutical client
+- Executive KPI reporting
+- Client performance comparison
+
+---
+
+# Business Insights
+
+- Identified physician engagement patterns across 500+ physicians.
+- Standardized physician engagement scoring for executive reporting.
+- Built reusable analytics models supporting physician segmentation and client performance analysis.
+- Automated dbt data quality testing to improve downstream reporting reliability.
+
+---
+
+# Data Quality Testing
+
+Implemented automated dbt tests including:
+
+- `not_null`
+- `unique`
+- Source validation
+- Schema documentation
+
+to ensure reliable analytics models.
+
+---
+
+# Run Project
 
 ```bash
-# Activate virtual environment
+# Activate environment
 conda activate dbt-env
 
-# Run all models
+# Run models
 dbt run
 
 # Run tests
@@ -57,44 +169,59 @@ dbt test
 
 # Generate documentation
 dbt docs generate
+
+# Launch documentation
 dbt docs serve
 ```
 
-## Project Structure
+---
 
+# Project Structure
+
+```
 models/
+└── physician_engagement/
+    ├── sources.yml
+    ├── schema.yml
+    ├── stg_physicians.sql
+    ├── stg_engagements.sql
+    ├── stg_events.sql
+    ├── stg_pharma_clients.sql
+    ├── physician_engagement_score.sql
+    ├── physician_tier.sql
+    └── client_performance.sql
+```
 
-├── physician_engagement/
+---
 
-│   ├── sources.yml
+# Skills Demonstrated
 
-│   ├── schema.yml
+- Modern ELT Pipeline Design
+- dbt Core
+- Snowflake
+- SQL Data Modeling
+- Data Quality Testing
+- Healthcare Analytics
+- Business Intelligence
+- Tableau Dashboard Development
+- Git Version Control
 
-│   ├── stg_physicians.sql
+---
 
-│   ├── stg_engagements.sql
+# Author
 
-│   ├── stg_events.sql
+**Cong Xiao**
 
-│   ├── stg_pharma_clients.sql
+Senior Analytics Professional
 
-│   ├── physician_engagement_score.sql
+Seattle, WA
 
-│   ├── physician_tier.sql
+LinkedIn: https://linkedin.com/in/congxiao
 
-│   └── client_performance.sql
+GitHub: https://github.com/xcong-analytics
 
-## Key Insights
+---
 
-- 500 physicians across 6 cities and 5 specialties
-- Tier B physicians represent the majority of KOL candidates
-- Pharmaceutical client average engagement scores range from 7.5-8.0
-- SQL-based data quality tests ensure data integrity
-
-## Author
-
-Cong Xiao
-
-## License
+# 📄 License
 
 MIT
