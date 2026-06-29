@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: physician_engagement_score
+    columns:
+      - name: PHYSICIAN_ID
+        tests:
+          - not_null
+          - unique
+      - name: ENGAGEMENT_SCORE
+        tests:
+          - not_null
+
+  - name: physician_tier
+    columns:
+      - name: PHYSICIAN_ID
+        tests:
+          - not_null
+          - unique
+
+  - name: client_performance
+    columns:
+      - name: CLIENT_ID
+        tests:
+          - not_null

@@ -1,0 +1,5 @@
+SELECT
+    CLIENT_ID,
+    CLIENT_NAME,
+    BUDGET
+FROM {{ source('raw', 'PHARMA_CLIENTS') }}

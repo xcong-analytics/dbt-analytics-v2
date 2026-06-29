@@ -1,0 +1,8 @@
+SELECT
+    PHYSICIAN_ID,
+    NAME,
+    SPECIALTY,
+    CITY,
+    YEARS_EXPERIENCE,
+    PUBLICATIONS
+FROM {{ source('raw', 'PHYSICIANS') }}

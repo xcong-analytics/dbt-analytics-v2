@@ -1,0 +1,7 @@
+SELECT
+    ENGAGEMENT_ID,
+    PHYSICIAN_ID,
+    EVENT_ID,
+    ROLE,
+    ENGAGEMENT_DATE
+FROM {{ source('raw', 'ENGAGEMENTS') }}

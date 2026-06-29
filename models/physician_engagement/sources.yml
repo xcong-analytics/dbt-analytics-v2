@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: MY_LEARNING
+    schema: PUBLIC
+    tables:
+      - name: PHYSICIANS
+      - name: PHARMA_CLIENTS
+      - name: EVENTS
+      - name: ENGAGEMENTS
