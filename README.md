@@ -1,6 +1,7 @@
 # Healthcare Analytics ELT Pipeline
 
 An end-to-end healthcare analytics solution built with **Snowflake, dbt Core, SQL, Tableau, Python, and Git** to transform physician engagement data into analytics-ready models for executive reporting and business decision-making.
+Pharmaceutical companies often track physician engagement across multiple activities, but raw data alone doesn't provide a clear picture of overall engagement. This project demonstrates how to transform raw interaction data into business metrics through a modern ELT pipeline.
 
 ---
 
